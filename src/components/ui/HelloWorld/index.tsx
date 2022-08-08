@@ -13,8 +13,8 @@ const HelloWorld = ({ name = "MyApp" }: HelloWorldProps) => {
   const { t, lang } = useTranslation("home");
   const router = useRouter();
   /* console.log(router.locale); */
-  const handleChangeLanguage = (e: string) => {
-    router.locale = e === "en" ? "en" : "es";
+  const handleChangeLanguage = (lng: string) => {
+    router.locale = lng === "en" ? "en" : "es";
     router.locale === "en" ? router.push("/", "/", { locale: "en" }) : router.push("/es");
   };
 
@@ -28,8 +28,8 @@ const HelloWorld = ({ name = "MyApp" }: HelloWorldProps) => {
       </ActionIcon>
       <Select
         defaultValue={router.locale}
-        onChange={(e: string) => {
-          handleChangeLanguage(e);
+        onChange={(lng: string) => {
+          handleChangeLanguage(lng);
         }}
         data={[
           { value: "en", label: "English" },
