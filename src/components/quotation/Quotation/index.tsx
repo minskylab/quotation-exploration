@@ -1,4 +1,4 @@
-import { Box, Container, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Box, Button, Container, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
 import { Mail, World } from "tabler-icons-react";
 import { TableScrollArea } from "../Table";
 
@@ -31,10 +31,22 @@ function QuotationDocument() {
   return (
     <Container>
       <Box mt={4}>
-        <Title order={1}>Technology Quotation</Title>
-        <Text size={"sm"}>Emitted at Thu 4, Aug 2022</Text>
-        <Text size={"sm"}>Valid until Mon 20, Aug 2022</Text>
+        <Title order={1}>Technology Development Quotation</Title>
       </Box>
+      <SimpleGrid cols={2} sx={{ alignItems: "center" }}>
+        <Box mt={8}>
+          <Text size={"sm"}>Emitted at Thu 4, Aug 2022</Text>
+          <Text size={"sm"}>Valid until Mon 20, Aug 2022</Text>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button>CODA Document</Button>
+        </Box>
+      </SimpleGrid>
 
       <Box mt={16}>
         <Text>
