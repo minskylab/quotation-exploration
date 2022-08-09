@@ -20,6 +20,7 @@ import { ChevronDown, MoonStars, Sun, World } from "tabler-icons-react";
 import { useRouter } from "next/router";
 import { TableOfContentsFloating } from "components/ui/TableOfContent";
 import MinskyPartnersLogotype from "components/ui/Logotype";
+import QuotationDocument from "components/quotation/Quotation";
 
 const navbarData = {
   active: "#overlays",
@@ -28,6 +29,16 @@ const navbarData = {
       label: "General Information",
       link: "#general_information",
       order: 1,
+    },
+    {
+      label: "Client",
+      link: "#client",
+      order: 2,
+    },
+    {
+      label: "Provider",
+      link: "#provider",
+      order: 2,
     },
     {
       label: "Resources",
@@ -126,7 +137,7 @@ export default function AppShellDemo() {
       // }
       footer={
         <Footer height={60} p="md">
-          Application footer
+          Minsky Partners Program 2022
         </Footer>
       }
       header={
@@ -165,7 +176,7 @@ export default function AppShellDemo() {
         </Header>
       }
     >
-      <Text>Resize app to see responsive navbar in action</Text>
+      <QuotationDocument />
     </AppShell>
   );
 }
