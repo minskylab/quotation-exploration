@@ -12,10 +12,19 @@ type Resource = {
   hours: number;
 };
 
-type Service = {
+type ServiceTable = {
   name: string;
   description: string;
   resources: string;
+};
+
+type TaskKind = "development" | "design" | "testing" | "maintenance" | "other";
+
+type Task = {
+  task: string;
+  kind: TaskKind;
+  start: string;
+  duration: number;
 };
 
 function QuotationDocument() {
@@ -142,7 +151,7 @@ function QuotationDocument() {
             felis sed.
           </Text>
         </Box>
-        <TableScrollArea<Service>
+        <TableScrollArea<ServiceTable>
           keyName="name"
           data={[
             {
@@ -169,7 +178,35 @@ function QuotationDocument() {
           ]}
         />
       </Stack>
-      <Stack spacing={"md"} mt={"xl"}></Stack>
+      <Stack spacing={"md"} mt={"xl"}>
+        <Box mt={16}>
+          <Title order={2}>Time Strategy</Title>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, sagittis, tristique mattis
+            id dui dui fringilla convallis. Aliquet enim orci, vitae adipiscing velit donec amet
+            felis sed.
+          </Text>
+        </Box>
+        <Box>
+          <Title order={3}>Main Tasks</Title>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, sagittis, tristique mattis
+            id dui dui fringilla convallis.
+          </Text>
+        </Box>
+        <TableScrollArea<Task>
+          keyName="task"
+          keyMap={{
+            duration: "Duration (hours)",
+          }}
+          data={Array.from(Array(4).keys()).map(i => ({
+            task: `Task ${i}`,
+            kind: "development",
+            start: "2020-01-01",
+            duration: 10,
+          }))}
+        />
+      </Stack>
     </Container>
   );
 }

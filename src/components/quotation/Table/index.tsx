@@ -58,8 +58,9 @@ export function TableScrollArea<T extends ColumnType>({
           <tr>
             {Object.keys(data[0]).map(key => (
               // <td key={key}>{rows[0][key]}</td>
-
-              <th key={key}>{key in keyMap ? keyMap[key] : key.toLocaleUpperCase()}</th>
+              <th key={key}>
+                {key in keyMap ? keyMap[key] : key.charAt(0).toUpperCase() + key.slice(1)}
+              </th>
             ))}
             {/* <th>Name</th>
             <th>Email</th>
