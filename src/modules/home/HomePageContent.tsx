@@ -123,7 +123,13 @@ export default function AppShellDemo() {
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       navbar={
-        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, md: 250, lg: 300 }}>
+        <Navbar
+          p="md"
+          hiddenBreakpoint="sm"
+          hidden={!opened}
+          width={{ sm: 200, md: 250, lg: 300 }}
+          pl={32}
+        >
           {/* <Text>Application navbar</Text> */}
           <TableOfContentsFloating {...navbarData} />
         </Navbar>

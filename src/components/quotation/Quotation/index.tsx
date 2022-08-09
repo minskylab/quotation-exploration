@@ -1,6 +1,17 @@
-import { Box, Button, Container, SimpleGrid, Stack, Text, TextInput, Title } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import { Mail, World } from "tabler-icons-react";
 import { TableScrollArea } from "../Table";
+import TimelineChart from "../TimelineChart";
 
 type ResourceKind = "development" | "design" | "testing" | "maintenance" | "other";
 
@@ -44,7 +55,7 @@ function QuotationDocument() {
             justifyContent: "flex-end",
           }}
         >
-          <Button>CODA Document</Button>
+          <Button>Knowledge Base</Button>
         </Box>
       </SimpleGrid>
 
@@ -218,6 +229,9 @@ function QuotationDocument() {
             duration: 10,
           }))}
         />
+      </Stack>
+      <Stack spacing={"md"} mt={"xl"}>
+        <TimelineChart />
       </Stack>
     </Container>
   );
