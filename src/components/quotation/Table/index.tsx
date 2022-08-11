@@ -31,7 +31,6 @@ interface TableScrollAreaProps<T extends ColumnType> {
   data: T[];
   keyName: keyof T;
   keyMap?: { [key: string]: string };
-  // cellRenderer: (key: keyof T) => React.ReactNode;
 }
 
 export function TableScrollArea<T extends ColumnType>({

@@ -1,6 +1,13 @@
 import { Paper, Text, Grid, Box } from "@mantine/core";
 
-type TaskKind = "development" | "design" | "testing" | "maintenance" | "other";
+type TaskKind =
+  | "design"
+  | "development"
+  | "testing"
+  | "maintenance"
+  | "research"
+  | "meets"
+  | "other";
 
 type Task = {
   task: string;
@@ -9,12 +16,69 @@ type Task = {
   duration: number;
 };
 
-type TimelineChartProps = {
-  timeAxis: "days" | "weeks" | "months" | "quarters" | "years";
-  tasks: Task[];
+type PositionedTask = {
+  task: Task;
+  row: number;
+
+  start: number;
+  end: number;
 };
 
-function TimelineChart() {
+type TimeAxisKind = "days" | "weeks" | "months" | "quarters" | "years";
+
+const tasksToPositionedTasks = (
+  tasks: Task[],
+  subDivisions: number = 24,
+  scale: TimeAxisKind = "days"
+): PositionedTask[] => {
+  const lowerBound = new Date(2020, 0, 1);
+  const upperBound = new Date(2022, 0, 1);
+
+  const lowerStartTask = tasks.reduce((previousLower, current) => {
+    if (current.start < previousLower.start) {
+      return current;
+    }
+
+    return previousLower;
+  }, tasks[0]);
+
+  const upperStartTask = tasks.reduce((previousUpper, current) => {
+    if (current.start > previousUpper.start) {
+      return current;
+    }
+
+    return previousUpper;
+  }, tasks[0]);
+
+  console.log(`lowerStartTask: ${lowerStartTask?.start}`);
+  console.log(`upperStartTask: ${upperStartTask?.start}`);
+
+  const sortedTasks = tasks.sort((a, b) => a.start.getTime() - b.start.getTime());
+
+  console.log(`sortedTasks: ${sortedTasks.map(task => task.start)}`);
+
+  return sortedTasks.map((task, i) => {
+    const posTask: PositionedTask = {
+      task,
+      row: i,
+      start: 0,
+      end: 3,
+    };
+    return posTask;
+  });
+
+  // return [];
+};
+
+type TimelineChartProps = {
+  timeAxis: TimeAxisKind;
+  tasks?: Task[];
+  subDivisions?: number;
+};
+
+function TimelineChart({ tasks, subDivisions = 24 }: TimelineChartProps) {
+  const positionedTasks = tasksToPositionedTasks(tasks ?? []);
+
   return (
     <div>
       {/* <Paper shadow="sm" p="md"> */}
@@ -48,22 +112,22 @@ function TimelineChart() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
-          gridTemplateRows: "repeat(auto-fit, minmax(100px, 1fr))",
+          gridTemplateColumns: `repeat(${subDivisions}, 1fr)`,
+          gridTemplateRows: `repeat(${tasks?.length ?? 1}, 1fr)`,
         }}
       >
-        <Paper shadow={"md"} p="sm">
-          <Text>Faz</Text>
-        </Paper>
-        <Paper shadow={"md"} p="sm">
-          <Text>Faz</Text>
-        </Paper>
-        <Paper shadow={"md"} p="sm">
-          <Text>Faz</Text>
-        </Paper>
-        <Paper shadow={"md"} p="sm">
-          <Text>Faz</Text>
-        </Paper>
+        {positionedTasks.map(({ task, row, start, end }) => (
+          <Paper
+            key={task.task}
+            shadow={"md"}
+            p="sm"
+            sx={{
+              gridColumn: "span 4",
+            }}
+          >
+            <Text>{task.task}</Text>
+          </Paper>
+        ))}
       </Box>
       {/* </Paper> */}
     </div>

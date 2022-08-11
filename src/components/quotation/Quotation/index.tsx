@@ -12,7 +12,7 @@ import {
 import { Mail, World } from "tabler-icons-react";
 import { TableScrollArea } from "../Table";
 import TimelineChart from "../TimelineChart";
-
+import dayjs from "dayjs";
 type ResourceKind = "development" | "design" | "testing" | "maintenance" | "other";
 
 type Resource = {
@@ -139,7 +139,7 @@ function QuotationDocument() {
           keyName="name"
           data={[
             {
-              name: "Example",
+              name: "Development",
               kind: "development",
               cost: 10,
               hours: 10,
@@ -231,7 +231,41 @@ function QuotationDocument() {
         />
       </Stack>
       <Stack spacing={"md"} mt={"xl"}>
-        <TimelineChart />
+        <TimelineChart
+          timeAxis="weeks"
+          tasks={[
+            {
+              task: "Task A",
+              kind: "development",
+              start: dayjs("2020-01-01").toDate(),
+              duration: 10,
+            },
+            {
+              task: "Task B",
+              kind: "development",
+              start: dayjs("2020-02-02").toDate(),
+              duration: 10,
+            },
+            {
+              task: "Task C",
+              kind: "development",
+              start: dayjs("2020-04-04").toDate(),
+              duration: 10,
+            },
+            {
+              task: "Task D",
+              kind: "development",
+              start: dayjs("2020-01-03").toDate(),
+              duration: 10,
+            },
+            {
+              task: "Task E",
+              kind: "development",
+              start: dayjs("2020-02-03").toDate(),
+              duration: 10,
+            },
+          ]}
+        />
       </Stack>
     </Container>
   );
